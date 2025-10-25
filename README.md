@@ -22,15 +22,15 @@ This project automates end-to-end UI tests for the SauceDemo website, focusing o
 webUIAutomation/
 │
 ├── tests/
-│   ├── sesi9_putristphn.js         # Main automation test script (SauceDemo)
+│   ├── sesi9_putristphn.js                  # Main automation test script (SauceDemo)
 │
 ├── assets/
-│   └── mochawesome-report.png      # Snapshot of the Mochawesome report
+│   └── mochawesome-report-snapshot.png      # Snapshot of the Mochawesome report
 │
-├── package.json                    # Project metadata & npm scripts
+├── package.json                             # Project metadata & npm scripts
 ├── package-lock.json
 ├── README.md
-└── mochawesome-report/             # Auto-generated HTML reports
+└── mochawesome-report/                      # Auto-generated HTML reports
 ```
 
 ---

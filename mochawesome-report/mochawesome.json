@@ -5,9 +5,9 @@
     "passes": 1,
     "pending": 0,
     "failures": 0,
-    "start": "2025-10-25T08:02:58.153Z",
-    "end": "2025-10-25T08:03:15.671Z",
-    "duration": 17518,
+    "start": "2025-10-25T08:31:36.896Z",
+    "end": "2025-10-25T08:31:54.846Z",
+    "duration": 17950,
     "testsRegistered": 1,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "b7d9b004-ca10-4c60-becf-2520d46ab46c",
+      "uuid": "880c50c5-ace4-4d7a-a616-058df4c5dc04",
       "title": "",
       "fullFile": "/Users/putristphn/Documents/qa-engineer/digital-skola/webUIAutomation/tests/sesi9_putristphn.js",
       "file": "/tests/sesi9_putristphn.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "483ca560-d982-4cab-95e0-e90a7e59aab7",
+          "uuid": "5702969c-4080-4b32-a597-f8e7a99c1b5c",
           "title": "SauceDemo website – Login & Sort product name Z→A",
           "fullFile": "/Users/putristphn/Documents/qa-engineer/digital-skola/webUIAutomation/tests/sesi9_putristphn.js",
           "file": "/tests/sesi9_putristphn.js",
@@ -37,7 +37,7 @@
               "title": "\"after each\" hook in \"SauceDemo website – Login & Sort product name Z→A\"",
               "fullTitle": "SauceDemo website – Login & Sort product name Z→A \"after each\" hook in \"SauceDemo website – Login & Sort product name Z→A\"",
               "timedOut": false,
-              "duration": 55,
+              "duration": 56,
               "state": null,
               "speed": null,
               "pass": false,
@@ -46,8 +46,8 @@
               "context": null,
               "code": "if (driver) {\n    await driver.quit();\n    driver = null;\n}",
               "err": {},
-              "uuid": "b49061be-09d8-45a9-9e59-8d7e5d7f3828",
-              "parentUUID": "483ca560-d982-4cab-95e0-e90a7e59aab7",
+              "uuid": "e8aaa0eb-19dc-41f6-ab0c-4d5783c3f629",
+              "parentUUID": "5702969c-4080-4b32-a597-f8e7a99c1b5c",
               "isHook": true,
               "skipped": false
             }
@@ -57,7 +57,7 @@
               "title": "Successfully login to SauceDemo website & Sort product name from Z→A",
               "fullTitle": "SauceDemo website – Login & Sort product name Z→A Successfully login to SauceDemo website & Sort product name from Z→A",
               "timedOut": false,
-              "duration": 17459,
+              "duration": 17888,
               "state": "passed",
               "speed": "slow",
               "pass": true,
@@ -66,20 +66,20 @@
               "context": null,
               "code": "options = new chrome.Options();\noptions.addArguments('--incognito'); // Add Chrome option to run in incognito mode so that no password-save popup appears\ndriver = await new Builder()\n    .forBrowser('chrome')\n    .setChromeOptions(options)\n    .build();\nawait driver.get('https://www.saucedemo.com');\nconst title = await driver.getTitle();\n// Validate the title page\nassert.strictEqual(title, 'Swag Labs');\n// Login inputs\nlet inputUsername = await driver.findElement(By.css('[data-test=\"username\"]'))\nlet inputPassword = await driver.findElement(By.css('[data-test=\"password\"]'))\nlet buttonLogin = await driver.findElement(By.css('[data-test=\"login-button\"]'))\nawait inputUsername.sendKeys('standard_user')\n// Small wait to allow input username to take effect\nawait driver.sleep(3000);\nawait inputPassword.sendKeys('secret_sauce')\n// Small wait to allow input password to take effect\nawait driver.sleep(3000);\nawait buttonLogin.click()\n// Small wait to allow login button to take effect\nawait driver.sleep(3000);\n\n// Wait for the shopping cart link to appear and be visible\nlet buttonCart = await driver.wait(\n    until.elementLocated(By.css('[data-test=\"shopping-cart-link\"]')),\n    10000\n);\nconst visible = await driver.wait(until.elementIsVisible(buttonCart), 5000, 'Shopping cart should be displayed');\n// Assert the element is visible\nassert.ok(await buttonCart.isDisplayed());\n// Validate that the text within the element is correct\nlet textAppLogo = await driver.findElement(By.className('app_logo'))\nlet logotext = await textAppLogo.getText()\nassert.strictEqual(logotext, 'Swag Labs')\n// Dropdown option and select sort Z→A\nlet dropdownSort = await driver.findElement(By.xpath('//select[@data-test=\"product-sort-container\"]'))\nawait dropdownSort.click()\n// Small wait to allow dropdown to take effect\nawait driver.sleep(3000);\nlet option = await driver.findElement(By.xpath('//option[text()=\"Name (Z to A)\"]'));\nawait option.click();\n// Small wait to allow sorting to take effect\nawait driver.sleep(3000);",
               "err": {},
-              "uuid": "1ee6a342-1dd6-4556-98a3-46e89ccf561c",
-              "parentUUID": "483ca560-d982-4cab-95e0-e90a7e59aab7",
+              "uuid": "d1a8b22e-f3b1-4c4b-98f4-33b63ecde1ea",
+              "parentUUID": "5702969c-4080-4b32-a597-f8e7a99c1b5c",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "1ee6a342-1dd6-4556-98a3-46e89ccf561c"
+            "d1a8b22e-f3b1-4c4b-98f4-33b63ecde1ea"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 17459,
+          "duration": 17888,
           "root": false,
           "rootEmpty": false,
           "_timeout": 30000

@@ -74,7 +74,7 @@ open mochawesome-report/mochawesome.html
 ## 🖼️ Test Report Snapshot (Mochawesome)
 Below is an example of the generated Mochawesome report after running the tests:
 
-![Mochawesome Report Snapshot](./assets/mochawesome-report-snapshot.png)
+![Mochawesome Report Screenshot](mochawesome-report/assets/mochawesome-report-snapshot.png)
 
 The report includes detailed logs, assertions, and pass/fail status for each test case.
 

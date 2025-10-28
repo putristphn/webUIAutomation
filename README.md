@@ -88,7 +88,7 @@ Below is an example of the generated Mochawesome report after running the tests:
 
 | Login Suite                              | Sorting Suite                                |
 | ---------------------------------------- | -------------------------------------------- |
-| ![Login Report](assets/report_login.png) | ![Sorting Report](assets/report_sorting.png) |
+| ![Login Report](mochawesome-report/assets/report_login.png) | ![Sorting Report](mochawesome-report/assets/report_sorting.png) |
 
 The report includes detailed logs, assertions, and pass/fail status for each test case.
 

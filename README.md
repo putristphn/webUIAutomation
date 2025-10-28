@@ -22,10 +22,10 @@ This project automates end-to-end UI tests for the SauceDemo website, focusing o
 ```
 webUIAutomation/
 ├── helper/
-│    ├── helperlogin.js                      # Add helper
-│    ├── helperloginfailed.js
-│    └── helpersorting.js
-│
+│    ├── helperlogin.js                      # Successful login flow
+│    ├── helperloginfailed.js                # Invalid login flow (locked out user)
+│    └── helpersorting.js                    # Sorting dropdown helper
+│  
 ├── tests/
 │   ├── sesi9_putristphn.js                  # Main automation test script (SauceDemo)
 │   └── sesi10_putristphn/
@@ -86,7 +86,9 @@ open mochawesome-report/mochawesome.html
 ## 🖼️ Test Report Snapshot (Mochawesome)
 Below is an example of the generated Mochawesome report after running the tests:
 
-![Mochawesome Report Screenshot](mochawesome-report/assets/mochawesome-report-snapshot.png)
+| Login Suite                              | Sorting Suite                                |
+| ---------------------------------------- | -------------------------------------------- |
+| ![Login Report](assets/report_login.png) | ![Sorting Report](assets/report_sorting.png) |
 
 The report includes detailed logs, assertions, and pass/fail status for each test case.
 
@@ -160,15 +162,6 @@ await driver.findElement(By.css('option[value="hilo"]')).click();
 const firstHigh = await driver.findElement(By.css('.inventory_item_price')).getText();
 assert.strictEqual(firstHigh.trim(), '$49.99');
 ```
-
-
-## 📊 Test Report Snapshots (Mochawesome)
-
-| Login Suite                              | Sorting Suite                                |
-| ---------------------------------------- | -------------------------------------------- |
-| ![Login Report](assets/report-login.png) | ![Sorting Report](assets/report-sorting.png) |
-
-Each suite shows detailed step results, duration, and pass/fail summary in Mochawesome’s interactive HTML report.
 
 ---
 

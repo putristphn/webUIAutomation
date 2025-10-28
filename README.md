@@ -20,9 +20,16 @@ This project automates end-to-end UI tests for the SauceDemo website, focusing o
 ## 📁 Project Structure
 ```
 webUIAutomation/
+├── helper/
+│    ├── helperlogin.js                      # Add helper
+│    ├── helperloginfailed.js
+│    └── helpersorting.js
 │
 ├── tests/
 │   ├── sesi9_putristphn.js                  # Main automation test script (SauceDemo)
+│   └── sesi10_putristphn/
+│       ├── sesi10_login.js                  # Login test cases
+│       └── sesi10_sorting.js                # Sorting test cases
 │
 ├── assets/
 │   └── mochawesome-report-snapshot.png      # Snapshot of the Mochawesome report

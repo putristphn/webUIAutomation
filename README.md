@@ -9,11 +9,12 @@ Developed as part of the **Digital Skola QA Bootcamp Batch 12** by **Putri Steph
 
 This project automates end-to-end UI tests for the SauceDemo website, focusing on:
 
-- ✅ Login functionality validation (Session 10)
-- ✅ Product Sorting (Name Z→A / Price Low→High) (Session 9 & 10)
+- ✅ Login functionality validation (valid & invalid users)
+- ✅ Product Sorting (Name Z→A / Price Low→High) 
 - ✅ Page title and logo verification  
 - ✅ Dropdown interaction and element visibility checks  
 - ✅ Chrome browser options (e.g., Incognito mode to avoid password popups)
+- ✅ Mochawesome HTML report generation
 
 ---
 
@@ -97,9 +98,9 @@ The report includes detailed logs, assertions, and pass/fail status for each tes
 - Handling elements using locators (`CSS`, `XPath`, `Class locators`)
 - Using explicit waits (`until.elementLocated`, `until.urlContains`)
 - Verifying UI elements instead of titles for headless runs
-- Generating HTML reports with Mochawesome
-- Separating positive and negative login flows into dedicated helpers
+- Separating positive and negative login flows into dedicated helpers (`helperlogin.js`, `helpersorting.js`)
 - Managing browser options (e.g., incognito mode)
+- Ensuring test stability with consistent assertions on dynamic elements
 
 ---
 
@@ -113,31 +114,61 @@ let option = await driver.findElement(By.xpath('//option[text()="Name (Z to A)"]
 await option.click();
 ```
 
-### Login (Positive Flow)
+### 🧩 Login – Valid Credentials
+Verifies redirection to the inventory page and the presence of the "Swag Labs" logo.
 ```javascript
-await loginForm(driver, 'standard_user', 'secret_sauce');
+await driver.wait(until.urlContains('/inventory.html'), 10000);
 const appLogo = await driver.findElement(By.className('app_logo'));
 const text = await appLogo.getText();
 assert.strictEqual(text, 'Swag Labs');
 ```
 
-### 🧩 Login (Negative Flow)
+### 🧩 Login – Invalid Credentials
+Checks for an error banner with the phrase “locked out”.
 ```javascript
-await loginFormFailed(driver, 'locked_out_user', 'secret_sauce');
-const errorEl = await driver.findElement(By.css('[data-test="error"]'));
+const errorEl = await driver.wait(
+  until.elementLocated(By.css('[data-test="error"]')),
+  10000,
+  'Error message did not appear'
+);
 const text = await errorEl.getText();
-assert.ok(text.toLowerCase().includes('locked out'));
+assert.match(text, /locked out/i, 'Error message should contain "locked out"');
 ```
 
-## 📊 Example Test Output
+### 🧩 Sorting – Expected Order Validation
+Uses known SauceDemo data to confirm proper sorting after dropdown selection.
+```javascript
+// Name (A → Z)
+await driver.findElement(By.css('option[value="az"]')).click();
+await driver.wait(until.urlContains('inventory'), 5000);
+const firstAZ = await driver.findElement(By.css('.inventory_item_name')).getText();
+assert.strictEqual(firstAZ, 'Sauce Labs Backpack');
 
-```pgsql
-Login Form Suite
-  ✓ should login successfully with valid credentials (3s)
-  ✓ should fail to login with locked out user (2s)
+// Name (Z → A)
+await driver.findElement(By.css('option[value="za"]')).click();
+await driver.wait(until.urlContains('inventory'), 5000);
+const firstZA = await driver.findElement(By.css('.inventory_item_name')).getText();
+assert.strictEqual(firstZA, 'Test.allTheThings() T-Shirt (Red)');
 
-2 passing (5s)
+// Price (Low → High)
+await driver.findElement(By.css('option[value="lohi"]')).click();
+const firstLow = await driver.findElement(By.css('.inventory_item_price')).getText();
+assert.strictEqual(firstLow.trim(), '$7.99');
+
+// Price (High → Low)
+await driver.findElement(By.css('option[value="hilo"]')).click();
+const firstHigh = await driver.findElement(By.css('.inventory_item_price')).getText();
+assert.strictEqual(firstHigh.trim(), '$49.99');
 ```
+
+
+## 📊 Test Report Snapshots (Mochawesome)
+
+| Login Suite                              | Sorting Suite                                |
+| ---------------------------------------- | -------------------------------------------- |
+| ![Login Report](assets/report-login.png) | ![Sorting Report](assets/report-sorting.png) |
+
+Each suite shows detailed step results, duration, and pass/fail summary in Mochawesome’s interactive HTML report.
 
 ---
 

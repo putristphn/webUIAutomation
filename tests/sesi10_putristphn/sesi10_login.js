@@ -19,6 +19,11 @@ after(async function () {
     if (driver) await driver.quit();
   });
 
+  // Add some delay 2s  after each test
+  afterEach(async function () {
+  await driver.sleep(2000);
+});
+
 it('should login successfully with valid credentials', async function () {
     await loginForm(driver, 'standard_user', 'secret_sauce');
     const title = await driver.getTitle();

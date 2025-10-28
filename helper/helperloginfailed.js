@@ -12,20 +12,17 @@ async function loginFormFailed(driver, username, password) {
   await passwordEl.sendKeys(password);
   await loginBtn.click();
 
-  // Wait for error element
-  const errorEl = await driver.wait(
-    until.elementLocated(By.css('[data-test="error"]')),
-    10000,
-    'Error message did not appear'
-  );
+// Wait for error element
+const errorEl = await driver.wait(
+  until.elementLocated(By.css('[data-test="error"]')),
+  10000,
+  'Error message did not appear'
+);
 
-  const text = await errorEl.getText();
-  assert.ok(
-    text.toLowerCase().includes('locked out'),
-    'Should display "locked out" message'
-  );
+const text = await errorEl.getText();
 
-  return text; // optional, for logging or assertions
+// Assert more clearly
+assert.match(text, /locked out/i, 'Error message should contain "locked out"');
 }
 
 module.exports = { loginFormFailed };

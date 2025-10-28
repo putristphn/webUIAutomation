@@ -1,52 +1,29 @@
-// helper/helperlogin.js
 const { By, until } = require('selenium-webdriver');
 const assert = require('assert');
 
-/**
- * Login function for successful login attempts.
- * Waits for redirect to inventory page and validates the title.
- */
 async function loginForm(driver, username, password) {
+  // Open login page
   await driver.get('https://www.saucedemo.com/');
 
-  const usernameEl = await driver.findElement(By.css('[data-test="username"]'));
-  const passwordEl = await driver.findElement(By.css('[data-test="password"]'));
-  const loginBtn   = await driver.findElement(By.css('.submit-button.btn_action'));
+  // Wait for username field
+  const inputUsername = await driver.wait(
+    until.elementLocated(By.css('[data-test="username"]')),
+    10000
+  );
+  const inputPassword = await driver.findElement(By.css('[data-test="password"]'));
+  const buttonLogin   = await driver.findElement(By.css('.submit-button.btn_action'));
 
-  await usernameEl.sendKeys(username);
-  await passwordEl.sendKeys(password);
-  await loginBtn.click();
+  // Fill login fields
+  await inputUsername.sendKeys(username);
+  await inputPassword.sendKeys(password);
+  await buttonLogin.click();
 
-  // ✅ Wait until redirected to inventory page
+ // Wait until redirected to inventory page
   await driver.wait(until.urlContains('/inventory.html'), 10000, 'URL did not change to inventory.html');
 
-  // ✅ Verify page title
+ // Then check the title
   const title = await driver.getTitle();
   assert.strictEqual(title, 'Swag Labs', 'User should be on inventory page after login');
 }
 
-/**
- * Login function for negative login attempts.
- * Waits for the error message to appear on the same page.
- */
-async function loginFormExpectError(driver, username, password) {
-  await driver.get('https://www.saucedemo.com/');
-
-  const usernameEl = await driver.findElement(By.css('[data-test="username"]'));
-  const passwordEl = await driver.findElement(By.css('[data-test="password"]'));
-  const loginBtn   = await driver.findElement(By.css('.submit-button.btn_action'));
-
-  await usernameEl.sendKeys(username);
-  await passwordEl.sendKeys(password);
-  await loginBtn.click();
-
-  // ✅ Wait for error message
-  const errorEl = await driver.wait(
-    until.elementLocated(By.css('[data-test="error"]')),
-    10000,
-    'Error message did not appear'
-  );
-  return errorEl;
-}
-
-module.exports = { loginForm, loginFormExpectError };
+module.exports = { loginForm };

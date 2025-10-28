@@ -21,7 +21,7 @@ const errorEl = await driver.wait(
 
 const text = await errorEl.getText();
 
-// Assert more clearly
+// Assert the error message contains "locked out"
 assert.match(text, /locked out/i, 'Error message should contain "locked out"');
 }
 

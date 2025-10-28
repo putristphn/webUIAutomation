@@ -23,7 +23,6 @@ before(async function () {
 
   // Add some delay 2s  after each test
   afterEach(async function () {
-  console.log('✅ One test finished, waiting 2s before next...');
   await driver.sleep(2000);
 });
 

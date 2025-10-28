@@ -9,8 +9,8 @@ Developed as part of the **Digital Skola QA Bootcamp Batch 12** by **Putri Steph
 
 This project automates end-to-end UI tests for the SauceDemo website, focusing on:
 
-- ✅ Login functionality validation  
-- ✅ Product sorting (Name Z→A)  
+- ✅ Login functionality validation (Session 10)
+- ✅ Product Sorting (Name Z→A / Price Low→High) (Session 9 & 10)
 - ✅ Page title and logo verification  
 - ✅ Dropdown interaction and element visibility checks  
 - ✅ Chrome browser options (e.g., Incognito mode to avoid password popups)
@@ -66,10 +66,14 @@ cd webUIAutomation
 ```bash
 npm install
 ```
-### 3️⃣ Execute the tests
-```bash
-npm run test
-```
+### 3️⃣ Run specidic tests
+
+| Command                 | Description                                |
+| ----------------------- | ------------------------------------------ |
+| `npm run testsesi9`     | Run Session 9 SauceDemo UI Fundamentals    |
+| `npm run sesi10login`   | Run Session 10 Login (Positive & Negative) |
+| `npm run sesi10sorting` | Run Session 10 Product Sorting Test        |
+
 ### 4️⃣ View the Mochawesome report
 After the tests finish running, open:
 ```bash
@@ -90,21 +94,49 @@ The report includes detailed logs, assertions, and pass/fail status for each tes
 ## 🧠 Key Learning Points
 
 - Setting up Selenium WebDriver with Node.js
-- Handling elements using locators (`CSS`, `XPath`, `By.className`)
-- Using explicit waits (`until.elementLocated`, `until.elementIsVisible`)
-- Generating HTML test reports with Mochawesome
-- Managing browser options (e.g., incognito)
+- Handling elements using locators (`CSS`, `XPath`, `Class locators`)
+- Using explicit waits (`until.elementLocated`, `until.urlContains`)
+- Verifying UI elements instead of titles for headless runs
+- Generating HTML reports with Mochawesome
+- Separating positive and negative login flows into dedicated helpers
+- Managing browser options (e.g., incognito mode)
 
 ---
 
-## 💡 Example Test Case (SauceDemo Sort Z→A)
+## 💡 Example Test Case 
+
+### 🧩 Product Sorting (Name Z→A)
 ```javascript
- let dropdownSort = await driver.findElement(By.xpath('//select[@data-test="product-sort-container"]'))
- await dropdownSort.click()
- // Small wait to allow dropdown to take effect
-await driver.sleep(3000);
+ let dropdownSort = await driver.findElement(By.xpath('//select[@data-test="product-sort-container"]'));
+await dropdownSort.click();
 let option = await driver.findElement(By.xpath('//option[text()="Name (Z to A)"]'));
 await option.click();
+```
+
+### Login (Positive Flow)
+```javascript
+await loginForm(driver, 'standard_user', 'secret_sauce');
+const appLogo = await driver.findElement(By.className('app_logo'));
+const text = await appLogo.getText();
+assert.strictEqual(text, 'Swag Labs');
+```
+
+### 🧩 Login (Negative Flow)
+```javascript
+await loginFormFailed(driver, 'locked_out_user', 'secret_sauce');
+const errorEl = await driver.findElement(By.css('[data-test="error"]'));
+const text = await errorEl.getText();
+assert.ok(text.toLowerCase().includes('locked out'));
+```
+
+## 📊 Example Test Output
+
+```pgsql
+Login Form Suite
+  ✓ should login successfully with valid credentials (3s)
+  ✓ should fail to login with locked out user (2s)
+
+2 passing (5s)
 ```
 
 ---

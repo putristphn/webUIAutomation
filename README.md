@@ -108,14 +108,6 @@ The report includes detailed logs, assertions, and pass/fail status for each tes
 
 ## 💡 Example Test Case 
 
-### 🧩 Product Sorting (Name Z→A)
-```javascript
- let dropdownSort = await driver.findElement(By.xpath('//select[@data-test="product-sort-container"]'));
-await dropdownSort.click();
-let option = await driver.findElement(By.xpath('//option[text()="Name (Z to A)"]'));
-await option.click();
-```
-
 ### 🧩 Login – Valid Credentials
 Verifies redirection to the inventory page and the presence of the "Swag Labs" logo.
 ```javascript
@@ -162,7 +154,6 @@ await driver.findElement(By.css('option[value="hilo"]')).click();
 const firstHigh = await driver.findElement(By.css('.inventory_item_price')).getText();
 assert.strictEqual(firstHigh.trim(), '$49.99');
 ```
-
 ---
 
 ## 👩🏻‍💻 Author

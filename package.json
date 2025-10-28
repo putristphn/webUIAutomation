@@ -3,7 +3,10 @@
     "version": "1.0.0",
     "description": "Selenium WebDriver tests using Mocha with Mochawesome reports",
     "scripts": {
-    "test": "mocha tests/sesi9_putristphn.js --reporter mochawesome --recursive"
+    "testsesi9": "mocha tests/sesi9_putristphn.js --reporter mochawesome --recursive",
+    "testsesi10": "mocha tests/sesi10_putristphn.js --reporter mochawesome --recursive",
+    "sesi10login": "mocha tests/sesi10_putristphn/sesi10_login.js --reporter mochawesome --recursive",
+    "sesi10sorting": "mocha tests/sesi10_putristphn/sesi10_sorting.js --reporter mochawesome --recursive"
     },
     "dependencies": {
         "selenium-webdriver": "^4.17.0"

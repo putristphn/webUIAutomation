@@ -1,7 +1,7 @@
 # 🧪 SauceDemo UI Automation Testing
 
 Automated Web UI Testing project for [**SauceDemo Website**](https://www.saucedemo.com) using **Selenium WebDriver** and **Mocha**.  
-Developed as part of the **Digital Skola QA Bootcamp Batch 12** by **Putri Stephanie Lesilolo**.
+Developed as part of the **Digital Skola QA Bootcamp Batch 12 - Session 9 (Web UI Automation Fundamental) & Session 10 (Web UI Automation Advance)** by **Putri Stephanie Lesilolo**.
 
 ---
 

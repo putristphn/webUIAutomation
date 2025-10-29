@@ -22,23 +22,25 @@ This project automates end-to-end UI tests for the SauceDemo website, focusing o
 ```
 webUIAutomation/
 ├── helper/
-│    ├── helperlogin.js                      # Successful login flow
-│    ├── helperloginfailed.js                # Invalid login flow (locked out user)
-│    └── helpersorting.js                    # Sorting dropdown helper
+│    ├── helperlogin.js                       # Successful login flow (Session 10)
+│    ├── helperloginfailed.js                 # Invalid login flow (Session 10)
+│    └── helpersorting.js                     # Sorting dropdown helper (Session 10)
 │  
 ├── tests/
-│   ├── sesi9_putristphn.js                  # Main automation test script (SauceDemo)
+│   ├── sesi9_putristphn.js                   # Login & Sorting test cases (Session 9)
 │   └── sesi10_putristphn/
-│       ├── sesi10_login.js                  # Login test cases
-│       └── sesi10_sorting.js                # Sorting test cases
+│       ├── sesi10_login.js                   # Login test cases (Session 10)
+│       └── sesi10_sorting.js                 # Sorting test cases (Session 10)
 │
 ├── assets/
-│   └── mochawesome-report-snapshot.png      # Snapshot of the Mochawesome report
+│   ├── mochawesome-report-snapshot.png       # Snapshot of the Mochawesome report (Session 9)
+│   ├── report-login.png                      # Snapshot of the Mochawesome report (Session 10)
+│   └── report-sorting.png                    # Snapshot of the Mochawesome report (Session 10)
 │
-├── package.json                             # Project metadata & npm scripts
+├── package.json                              # Project metadata & npm scripts
 ├── package-lock.json
 ├── README.md
-└── mochawesome-report/                      # Auto-generated HTML reports
+└── mochawesome-report/                       # Auto-generated HTML reports
 ```
 
 ---
@@ -86,9 +88,14 @@ open mochawesome-report/mochawesome.html
 ## 🖼️ Test Report Snapshot (Mochawesome)
 Below is an example of the generated Mochawesome report after running the tests:
 
+### Mochawesome report for Session 10 
+
 | Login Suite                              | Sorting Suite                                |
 | ---------------------------------------- | -------------------------------------------- |
 | ![Login Report](mochawesome-report/assets/report_login.png) | ![Sorting Report](mochawesome-report/assets/report_sorting.png) |
+
+### Mochawesome report for Session 9 
+![Login Report](mochawesome-report/assets/mochawesome-report-snapshot.png) 
 
 The report includes detailed logs, assertions, and pass/fail status for each test case.
 
